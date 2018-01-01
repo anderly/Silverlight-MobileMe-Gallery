@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2856D5C-0BD0-4503-A1C6-2460BCCD3A67}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MefMvvm</RootNamespace>
+    <AssemblyName>MefMvvm</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions">
+      <HintPath>C:\Program Files\Microsoft SDKs\Expression\Blend 3\Interactivity\Libraries\Silverlight\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.ComponentModel.Composition, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.Composition.Initialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>C:\Program Files\Microsoft SDKs\Expression\Blend 3\Interactivity\Libraries\Silverlight\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\Designer.cs" />
+    <Compile Include="Common\NotifyPropertyChangedBase.cs" />
+    <Compile Include="Common\WeakEventHandlerManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommonServices\DefaultContainerStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\DefaultDispatcherService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\DefaultVisualStateManagerInvoker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\Mediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\MediatorBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\MediatorMessageSinkAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\MessageToActionMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\CommonServices\WeakAction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Contracts\IContainerStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Contracts\IContextAware.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Contracts\IDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Contracts\IMediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Contracts\IMediatorBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Contracts\IVisualStateManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\BasicViewModelInializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\DataContextAwareViewModelInitializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\DefaultComposer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\ExportService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\ExportViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\IComposer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\IDataContextAware.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\LocatorBootstrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\MEFedMVVMCatalog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\MEFedMVVMExportProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\MEFedMVVMResolver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\ViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModelLocator\ViewModelRepoitory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModelLocator\ExportsMetaData\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,131 @@
+﻿<navigation:Page 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:ext="clr-namespace:Gallery.Extensions"
+		mc:Ignorable="d"
+		xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+		x:Class="Gallery.Views.Viewer"
+		d:DesignWidth="800" d:DesignHeight="480"
+		Title="MobileMe Gallery"
+		xmlns:vm="clr-namespace:Gallery.ViewModels"
+		ext:Page.Title="{Binding PageTitle}">
+	<!--
+	xmlns:vml="clr-namespace:MefMvvm.ViewModelLocator;assembly=MefMvvm"
+	vml:ViewModelLocator.ViewModel="ViewerViewModel"
+	-->
+	<navigation:Page.DataContext>
+		<vm:ViewerViewModel/>
+	</navigation:Page.DataContext>
+	<navigation:Page.Resources>
+
+		<Storyboard x:Name="HideOptionsStoryboard">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="OptionsBar" Storyboard.TargetProperty="(FrameworkElement.Height)">
+				<EasingDoubleKeyFrame KeyTime="00:00:00.0500000" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+
+		<Storyboard x:Name="ShowOptionsStoryboard">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="OptionsBar" Storyboard.TargetProperty="(FrameworkElement.Height)">
+				<EasingDoubleKeyFrame KeyTime="00:00:00.0500000" Value="50"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+
+	</navigation:Page.Resources>
+
+	<Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" MinHeight="200" />
+			<RowDefinition x:Name="Row_4" Height="40" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Border x:Name="HeaderBorder" Style="{StaticResource HeaderBorderStyle}">
+			<StackPanel x:Name="HeaderTitle" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+				<TextBlock x:Name="Title" Style="{StaticResource HeaderViewerTitleStyle}" Text="{Binding Title}" />
+				<TextBlock x:Name="SubTitle" Style="{StaticResource HeaderViewerSubTitleStyle}" Text="{Binding SubTitle}" />
+			</StackPanel>
+		</Border>
+
+		<HyperlinkButton x:Name="HomeButton" Margin="25,0,0,0" FontSize="13.333" FontFamily="Arial" Style="{StaticResource GradientButtonStyle}" Content="{Binding GalleryTitle}" Command="{Binding HomeCommand}" CommandParameter="gallery" />
+		<HyperlinkButton x:Name="OptionsButton" Content="Hide Options" HorizontalAlignment="Right" Margin="0,0,15,0" FontSize="13.333" FontFamily="Arial" Style="{StaticResource GradientButtonStyle}" Click="OptionsButton_Click" />
+
+		<Grid x:Name="OptionsBar" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF242424" Height="50">
+			<StackPanel x:Name="Options" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+				<Button x:Name="DownloadButton" Content="Download" Style="{StaticResource OptionsButtonStyle}" Template="{StaticResource DownloadButton}">
+					<ToolTipService.ToolTip>
+						<ToolTip Content="Download a compressed file of this album"/>
+					</ToolTipService.ToolTip>
+				</Button>
+
+				<Button x:Name="SubscribeButton" Content="Subscribe" Style="{StaticResource OptionsButtonStyle}" Template="{StaticResource SubscribeButton}">
+					<ToolTipService.ToolTip>
+						<ToolTip Content="Subscribe to an RSS feed of this album"/>
+					</ToolTipService.ToolTip>
+				</Button>
+
+				<Button x:Name="UploadButton" Content="Upload" Style="{StaticResource OptionsButtonStyle}" Template="{StaticResource UploadButton}">
+					<ToolTipService.ToolTip>
+						<ToolTip Content="Upload photos or movies to this album"/>
+					</ToolTipService.ToolTip>
+				</Button>
+
+				<Button x:Name="SendToAlbumButton" Content="Send to Album" Style="{StaticResource OptionsButtonStyle}" Template="{StaticResource SendToAlbum}">
+					<ToolTipService.ToolTip>
+						<ToolTip Content="Find out how to send photos or movies by mobile phone or email"/>
+					</ToolTipService.ToolTip>
+				</Button>
+
+				<Button x:Name="TellAFriendButton" Content="Tell a Friend" Style="{StaticResource OptionsButtonStyle}" Template="{StaticResource TellAFriendButton}">
+					<ToolTipService.ToolTip>
+						<ToolTip Content="Email a friend a link to this album"/>
+					</ToolTipService.ToolTip>
+				</Button>
+
+			</StackPanel>
+		</Grid>
+
+		<Grid x:Name="Content" Style="{StaticResource ContentStyle}">
+			<ScrollViewer x:Name="ContentViewer" Background="Black" Style="{StaticResource ContentViewerStyle}" Padding="5">
+
+
+			</ScrollViewer>
+		</Grid>
+
+		<Grid x:Name="AlbumControlsBar" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF343434">
+
+			<StackPanel x:Name="Views" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+
+				<HyperlinkButton x:Name="GridViewButton" Content="Grid" Style="{StaticResource GridButtonStyle}" Margin="20,0,0,0" />
+
+				<HyperlinkButton x:Name="MosaicViewButton" Content="Mosaic" Style="{StaticResource MosaicButtonStyle}" />
+
+				<HyperlinkButton x:Name="CarouselViewButton" Content="Carousel" Style="{StaticResource CarouselButtonStyle}" />
+
+				<HyperlinkButton x:Name="SlideshowButton" Content="Slideshow" Style="{StaticResource SlideshowButtonStyle}" />
+
+			</StackPanel>
+
+			<StackPanel x:Name="ColorsAndSlider" Orientation="Horizontal" HorizontalAlignment="Right">
+
+				<TextBlock HorizontalAlignment="Right" Width="33" Text="Color:" TextWrapping="Wrap" FontFamily="Arial" Margin="0,14,0,0" Foreground="#FF666666"/>
+
+				<RadioButton x:Name="ColorBlack" HorizontalAlignment="Left" Content="" d:LayoutOverrides="Height" GroupName="Color" Margin="0,12,0,0" Style="{StaticResource BlackRadioButton}"/>
+				<RadioButton x:Name="ColorDarkGray" HorizontalAlignment="Left" Content="" GroupName="Color" d:LayoutOverrides="Height" Margin="0,12,0,0" Style="{StaticResource DarkGrayRadioButton}"/>
+				<RadioButton x:Name="ColorLightGray" HorizontalAlignment="Left" Content="" GroupName="Color" d:LayoutOverrides="Height" Margin="0,12,0,0" Style="{StaticResource LightGrayRadioButton}"/>
+				<RadioButton x:Name="ColorWhite" HorizontalAlignment="Left" Content="" GroupName="Color" d:LayoutOverrides="Height" RenderTransformOrigin="1.7,0.647" Margin="0,12,35,0" Style="{StaticResource WhiteRadioButton}"/>
+
+				<Slider x:Name="ImageSizeSlider" Foreground="#FF666666" Orientation="Horizontal" Minimum="80" Maximum="320" Width="180" Margin="0,0,40,0" Style="{StaticResource SliderStyle}" Value="200" ValueChanged="ImageSizeSlider_ValueChanged" />
+
+			</StackPanel>
+
+		</Grid>
+
+	</Grid>
+</navigation:Page>

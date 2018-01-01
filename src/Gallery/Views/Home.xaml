@@ -1,0 +1,167 @@
+﻿<navigation:Page x:Class="Gallery.Home" 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+	xmlns:vm="clr-namespace:Gallery.ViewModels"
+	xmlns:ext="clr-namespace:Gallery.Extensions"
+	mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+	ext:Page.Title="{Binding PageTitle}"
+	Style="{StaticResource PageStyle}"
+	>
+	<!--
+	xmlns:vml="clr-namespace:MefMvvm.ViewModelLocator;assembly=MefMvvm"
+	vml:ViewModelLocator.ViewModel="HomeViewModel"
+	-->
+	<navigation:Page.DataContext>
+		<vm:HomeViewModel />
+	</navigation:Page.DataContext>
+	<navigation:Page.Resources>
+		
+		<Style x:Key="GalleryLinkTitle" TargetType="TextBlock">
+			<Setter Property="Grid.Row" Value="1" />
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="FontFamily" Value="Arial" />
+			<Setter Property="FontSize" Value="15" />
+			<Setter Property="Foreground" Value="Silver" />
+			<Setter Property="Margin" Value="8,4,0,0" />
+		</Style>
+		
+		<Style x:Key="GalleryLinkSubTitle" TargetType="TextBlock">
+			<Setter Property="Grid.Row" Value="2" />
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="FontFamily" Value="Arial" />
+			<Setter Property="FontSize" Value="11" />
+			<Setter Property="Foreground" Value="Gray" />
+			<Setter Property="Margin" Value="8,2,0,0" />
+		</Style>
+
+		<Style x:Key="GalleryAlbumLinkStyle" TargetType="HyperlinkButton">
+			<Setter Property="Grid.Column" Value="1" />
+			<Setter Property="HorizontalAlignment" Value="Right" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="Margin" Value="5,0,20,20" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="HyperlinkButton">
+						<Grid Width="180" Height="Auto">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="160" />
+								<RowDefinition Height="20" />
+								<RowDefinition Height="15" />
+							</Grid.RowDefinitions>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="0" Storyboard.TargetName="Title" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+												<EasingColorKeyFrame KeyTime="00:00:00" Value="#FFFFFFFF"/>
+											</ColorAnimationUsingKeyFrames>
+											<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="0" Storyboard.TargetName="SubTitle" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+												<EasingColorKeyFrame KeyTime="00:00:00" Value="#FF33B6FF"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Viewbox Height="160" Width="160" HorizontalAlignment="Left" VerticalAlignment="Bottom" Stretch="None">
+								<Border BorderBrush="Black" BorderThickness="1" Clip="{Binding BorderClip}">
+									<Image x:Name="ScrubSprite" Height="{Binding ScrubSpriteActualHeight}" Width="{Binding ScrubSpriteFrameWidth}" Source="{Binding ScrubSpritePath}" Stretch="None" Clip="{Binding ImageClip}" RenderTransform="{Binding ImageTransform}" MouseMove="Album_MouseMove" MouseLeave="Album_MouseLeave" Cursor="Hand" />
+								</Border>
+							</Viewbox>
+							<TextBlock x:Name="Title" Text="{Binding DisplayTitle}" Style="{StaticResource GalleryLinkTitle}" />
+							<TextBlock x:Name="SubTitle" Text="{Binding SubTitle}" Style="{StaticResource GalleryLinkSubTitle}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+		<Style x:Key="GalleryMovieLinkStyle" TargetType="HyperlinkButton">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="HyperlinkButton">
+						<Grid Width="180" Height="160">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="100" />
+								<RowDefinition Height="20" />
+								<RowDefinition Height="15" />
+							</Grid.RowDefinitions>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="0" Storyboard.TargetName="Title" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+												<EasingColorKeyFrame KeyTime="00:00:00" Value="#FFFFFFFF"/>
+											</ColorAnimationUsingKeyFrames>
+											<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="0" Storyboard.TargetName="SubTitle" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+												<EasingColorKeyFrame KeyTime="00:00:00" Value="#FF33B6FF"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Viewbox Height="100" Width="{Binding ScrubSpriteFrameWidth}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Stretch="None">
+								<Border BorderBrush="Black" BorderThickness="1" Clip="{Binding BorderClip}" VerticalAlignment="Bottom">
+									<Image x:Name="ScrubSprite" VerticalAlignment="Bottom" Height="{Binding ScrubSpriteActualHeight}" Width="{Binding ScrubSpriteFrameWidth}" Source="{Binding ScrubSpritePath}" Stretch="None" Clip="{Binding MovieClip}" RenderTransform="{Binding ImageTransform}" MouseMove="Movie_MouseMove" MouseLeave="Movie_MouseLeave" Cursor="Hand" />
+								</Border>
+							</Viewbox>
+							<TextBlock x:Name="Title" Text="{Binding DisplayTitle}" Style="{StaticResource GalleryLinkTitle}" />
+							<TextBlock x:Name="SubTitle" Text="{Binding SubTitle}" Style="{StaticResource GalleryLinkSubTitle}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!-- DataTemplate for Photograph instances -->
+		<DataTemplate x:Key="AlbumsTemplate">
+			<HyperlinkButton x:Name="AlbumLink" Style="{StaticResource GalleryAlbumLinkStyle}" Width="180" Height="Auto" NavigateUri="{Binding NavigateUri}" />
+		</DataTemplate>
+		
+		<!-- DataTemplate for Movie instances -->
+		<DataTemplate x:Key="MoviesTemplate">
+			<HyperlinkButton x:Name="MovieLink" Style="{StaticResource GalleryMovieLinkStyle}" Width="180" Height="Auto" NavigateUri="{Binding NavigateUri}" />
+		</DataTemplate>
+
+	</navigation:Page.Resources>
+	<Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60" />
+			<RowDefinition Height="*" MinHeight="200" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Border x:Name="HeaderBorder" Style="{StaticResource HeaderBorderStyle}">
+			<TextBlock x:Name="Title" Style="{StaticResource HeaderTitleStyle}" Text="{Binding Title}" />
+		</Border>
+
+		<HyperlinkButton x:Name="RssButton" Style="{StaticResource RssButton}" Content="{Binding LastUpdated}" />
+
+		<ScrollViewer x:Name="ContentViewer" Style="{StaticResource ContentViewerStyle}">
+
+			<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="25,0,25,0">
+			<TextBlock x:Name="Albums" Text="{Binding AlbumText}" Margin="10,5,0,10" FontFamily="Arial" FontSize="20" Foreground="LightSlateGray" />
+			<ListBox x:Name="AlbumList"
+			   Style="{StaticResource WrapListBox}"
+			   ItemTemplate="{StaticResource AlbumsTemplate}"
+			   Margin="4" Background="Black" ItemsSource="{Binding Albums}" />
+			<Rectangle Fill="#FF111111" Height="1" HorizontalAlignment="Stretch" Margin="10,0,0,10" />
+			<TextBlock x:Name="Movies" Text="{Binding MovieText}" Margin="10,5,0,10" FontFamily="Arial" FontSize="20" Foreground="LightSlateGray" />
+			<ListBox
+				  x:Name="MovieList"
+				  Style="{StaticResource WrapListBox}"
+				  ItemTemplate="{StaticResource MoviesTemplate}"
+				  Margin="4" Background="Black" ItemsSource="{Binding Movies}" />
+		</StackPanel>
+			
+		</ScrollViewer>
+			
+	</Grid>
+
+</navigation:Page>
